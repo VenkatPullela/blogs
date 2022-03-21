@@ -55,8 +55,19 @@ Connection set up without any traffic may be due to DoS attack.
 Even though these aging mechanisms were developed to address specific use cases in mind at the time of design, 
 they were designed in a generic way to help network engineers use them to create complex mechanisms to deal with ever changing traffic patterns.
 
+## Hardware, Software implementations
+Software based aging implementations do not provide dependable performance due to bottlenecks in bus bandwidth, and competing regular work loads, 
+affecting overall switching performance. Dedicated [Hardware based Aging Engines](https://patents.google.com/patent/US7274693B1) that run in parallel to 
+switching provide predictable performance. These engines carve out a fixed/configurable amount of memory bandwidth to evaluate flows for aging. 
+They may also steal cycles when there is a gap between packets to clean up the flow tables. They walk through the flow tables in the background to check each flow against the configured aging mechanisms. When they age a flow, or refresh a flow, they collect flow statistics along with time stamps and other associated data, 
+and send them to CPU via FIFOs for further processing and export. Some pipelines support direct export of the flow and telemetry data. These automated engines 
+also help in spreading the workload in collecting the statistics, and export (Netflow Data Export, Telemetry). This prevents the overflow of limited size 
+FIFOs between the pipelines and the CPUs due to a burst of new flows or aging.
+
 # References
-[Catalyst 6500 Series Switches Netflow TCAM Utilization Management - Cisco ](https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/116434-problemsolution-product-00.html)
+- [Catalyst 6500 Series Switches Netflow TCAM Utilization Management - Cisco ](https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/116434-problemsolution-product-00.html)
+- [Hardware based Aging Engine - Search engine for forwarding table content addressable memorySearch engine for forwarding table content addressable memory
+US Patent 7,274,693](https://patents.google.com/patent/US7274693B1)
 
 ## Lawyer stuff
 Netflow belongs to Cisco Systems
