@@ -8,8 +8,12 @@ This blog is a journey down the memory lane to review the history of Flows.
 - [Types of Flows](https://github.com/VenkatPullela/blogs/blob/main/flow_types.md)
 - [Aging Flows](https://github.com/VenkatPullela/blogs/blob/main/flow_aging.md)
 - Slow path, Fast Path - TBD
-- Hardware Implementation - TBD
 - Memory Considerations - TBD
+
+# References
+- [Catalyst 6500 Series Switches Netflow TCAM Utilization Management - Cisco ](https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/116434-problemsolution-product-00.html)
+- [Hardware based Aging Engine - Search engine for forwarding table content addressable memorySearch engine for forwarding table content addressable memory
+US Patent 7,274,693](https://patents.google.com/patent/US7274693B1)
 
 ## Lawyer stuff
 Netflow belongs to Cisco Systems
