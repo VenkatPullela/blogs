@@ -4,9 +4,9 @@ Flows are in fasion again. First L3 swicthes were flow based. Then ASICs started
 
 This blog is a journey down the memory lane to review the history of Flows.
 
-- [Flow Switching, Flow Caching](https://github.com/VenkatPullela/blogs/blob/main/flow_switching.md)
-- [Types of Flows](https://github.com/VenkatPullela/blogs/blob/main/flow_types.md)
-- [Aging Flows](https://github.com/VenkatPullela/blogs/blob/main/flow_aging.md)
+- [Flow Switching, Flow Caching](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_switching.md)
+- [Types of Flows](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_types.md)
+- [Aging Flows](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_aging.md)
 - Slow path, Fast Path - TBD
 - Memory Considerations - TBD
 
