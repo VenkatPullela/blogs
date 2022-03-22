@@ -8,7 +8,7 @@ a flow cache is constructed with the 5 tuple as the key and the feature results 
 
 ## Flow Caching
 In one form of Netflow Switching implementation, called __Shortcut Switching__, a router is front-ended with a switch, 
-called __Netflow Switch__ that implements a __Netflow Cache__. Router is connected only to the switch, through many linkes, for example one per VLAN, called milking machine topology, or a single trunk port called rputer on a stick topology. Packets have to go through the switch to reach the router. Over a period routers were embedded in the switch directly, making it a single box L3 switch. In its first impleentation hardware could process packets at 10x the speed as software, increasing the overall throughput from 180K PPS to 1.8M PPS.
+called __Netflow Switch__ that implements a __Netflow Cache__. Router is connected only to the switch, through many links, for example one per VLAN, called milking machine topology, or a single trunk port called router on a stick topology. Packets have to go through the switch to reach the router. Over a period routers were embedded in the switch directly, making it a single box L3 switch. In its first implementation hardware could process packets at 10x the speed as software, increasing the overall throughput from 180K PPS to 1.8M PPS.
 
 ![Router On A Stick](https://github.com/VenkatPullela/blogs/blob/main/assets/roast.png)
 
