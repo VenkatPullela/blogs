@@ -4,6 +4,9 @@ Aging is the mechanism to remove the flows from flow tables to make room for new
 Aging of Netflow cache is the most important factor in the performance of Netflow Switching. 
 Expired flows can easily fill up the flow cache forcing new flows to take slow path reducing the performance many fold. 
 
+Even though these aging mechanisms were developed to address specific use cases in mind at the time of design, 
+they were designed in a generic way to help network engineers use them to create complex mechanisms to deal with ever changing traffic patterns.
+
 ## Time stamps 
 To assist in aging, typically, two time stamps are maintained in each flow.
 
@@ -52,17 +55,28 @@ Since then DoS attacks have evolved as well as new forms of aging are created.
 __Slow Aging__ is used to identify flows that are slow to set up a connection or abandon the connection after set up. 
 Connection set up without any traffic may be due to DoS attack.
 
-Even though these aging mechanisms were developed to address specific use cases in mind at the time of design, 
-they were designed in a generic way to help network engineers use them to create complex mechanisms to deal with ever changing traffic patterns.
+__FIN Aging__ is used to identify flows that saw a FIN packet. Some implementations may have a simple FIN seen attribute, some may have additional ACK seen after FIN  and others may implement a full fledged TCP connection state tracking. In either case, flows which see a FIN are typically aged faster. This could scheme may have a separate timer configuration, or an acceleration factor that reduce the normal aging by a configurable factor. Usually __RST__ bit seen is also clubbed with the FIN aging schemes.
 
-## Hardware, Software implementations
-Software based aging implementations do not provide dependable performance due to bottlenecks in bus bandwidth, and competing regular work loads, 
-affecting overall switching performance. Dedicated [Hardware based Aging Engines](https://patents.google.com/patent/US7274693B1) that run in parallel to 
+Switching pipeline it self may do the aging of flows for FIN/RST while switching the packet. This may be done without waiting for the Aging state machine find the flow with the FIN/RST bit later. Typically, this is done when there is a slower path to handle subsequent packets, creating space immediately for other flows that may be waiting for space.
+
+__Flowlet Aging__ is used to identify flowlets within a flow. Flows may have a period of high packet rate followed by a gap or a slow packet rate. Connectionless protocols like UDP or transaction processing may form the flowlets usage pattern.
+
+__Aggressive Aging__ is used to identify high occupancy rate of the flow table. Typically this triggers aggressive aging of flows by reducing the timer values by a configurable factor. Once the utilization goes below a certain threshold, original values of aging timers are restored. This may also trigger higher bandwidth allocation for aging engine temporarily.
+
+## Software implementation
+Software based aging implementation for hardware based Flow switching implementations, do not provide dependable performance due to bottlenecks in bus bandwidth, and competing regular work loads, affecting overall switching performance. 
+
+## Hardware based aging
+Dedicated [Hardware based Aging Engines](https://patents.google.com/patent/US7274693B1) that run in parallel to 
 switching provide predictable performance. These engines carve out a fixed/configurable amount of memory bandwidth to evaluate flows for aging. 
 They may also steal cycles when there is a gap between packets to clean up the flow tables. They walk through the flow tables in the background to check each flow against the configured aging mechanisms. When they age a flow, or refresh a flow, they collect flow statistics along with time stamps and other associated data, 
 and send them to CPU via FIFOs for further processing and export. Some pipelines support direct export of the flow and telemetry data. These automated engines 
 also help in spreading the workload in collecting the statistics, and export (Netflow Data Export, Telemetry). This prevents the overflow of limited size 
 FIFOs between the pipelines and the CPUs due to a burst of new flows or aging.
+
+## Flow creation
+
+## Aging vs. Replacement
 
 # References
 - [Catalyst 6500 Series Switches Netflow TCAM Utilization Management - Cisco ](https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/116434-problemsolution-product-00.html)
