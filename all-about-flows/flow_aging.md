@@ -10,10 +10,16 @@ they were designed in a generic way to help network engineers use them to create
 ## Time stamps 
 To assist in aging, typically, two time stamps are maintained in each flow.
 
-__Granularity:__ Most systems maintain a very accurate time, typically in nanoseconds. 
+__Accuracy__ Most systems maintain a very accurate time, typically in nanoseconds. 
 Since aging need not be that fine grain, 
 switches maintain a separate timestamp register (running counter) or derive it from system time by ignoring a few least significant bits.
-he granularity of this time stamp determines the aging accuracy, billing accuracy and the memory usage.
+The granularity of this time stamp determines the aging accuracy, billing accuracy and the memory usage. Thetime stamp registers may also be 
+implemented as a bit mask, with each bit signifying a time range. These bits may bey be used for different aging schmes described below. 
+Bit masks create some interesting possibilities with non uniform accuracy.
+
+Accuracy is a misnomer. For example, when an inactivity timer is set to 1 second, it is impossible to find and remove all flows that are 
+idle for 1 second exactly. The flow may stay longer till another flow needs the same space, if it is a hash based imlementation. 
+In another implementation flows may be scanned every 100ms(0.1sec), leading to an actual idle timout of any where between 1 sec to 1.1 sec. Even scanning it self may take variable time based on the occupancy, leading to variations in the actual idle timeout that is enforced.
 
 __Start Time__ of each flow can be stored in the cache for use in auditing and billing purposes. 
 It can also be used in some flow aging schemes to determine packet rates of the flow. 
