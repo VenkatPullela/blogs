@@ -5,7 +5,7 @@ Flows are in fashion again. First L3 switches were flow based. Then ASICs starte
 This blog is a journey down the memory lane to review the history of Flows.
 
 - [Flow Switching, Flow Caching](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_switching.md)
-- [Hardware FLow Table Implementation](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_table_in_hw.md)
+- [Hardware Flow Table Implementation](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_table_in_hw.md)
 - [Types of Flows](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_types.md)
 - [Aging Flows](https://github.com/VenkatPullela/blogs/tree/main/all-about-flows/flow_aging.md)
 - Slow path, Fast Path - TBD
