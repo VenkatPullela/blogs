@@ -1,9 +1,0 @@
-# Hardware implementation of flow tables
-Hardware based tableimplementations were in use even from L2 switching days, with MAC-VLAN lookups 
-in a CAM (Content Addressable Memories). Typically these were hardware implementations of a Hash table. Flow tables started with similar hashing techniques. 
-Hashing tables came with the typical problems of collisions, lower utilization etc. Handling these hash collisions is harder in hardware implementations as they may require 
-additional memory accesses, thus affecting uniform performance. In heneral, pipeline designs are difficult when there are variable number of operations involved. 
-Customers usually look for a 99% guarantee or more hit percentage in the tables for deterministic capacity planning. This meant, utilization could be as low as 25% of
- the flow table.
-
-![TCAM based Flow Table ] (https://patents.google.com/patent/US7197597B1)
